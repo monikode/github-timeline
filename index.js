@@ -1,3 +1,4 @@
+var data = [];
 const monthNames = [
   "January",
   "February",
@@ -14,36 +15,51 @@ const monthNames = [
 ];
 
 async function getData(name) {
-  var data = [];
   var aux = [];
-  var months = [];
-  var repos = [];
   var promise = await fetch(`https://api.github.com/users/${name}/repos`);
   var response = await promise.json();
   if (response.message) return response;
+  console.log(response);
+
   response.forEach((it) => {
     var date = new Date(it.created_at);
     const year = date.getFullYear();
     const month = monthNames[date.getMonth()];
     const day = date.getDate();
 
-    repos.push({
+    if (!aux.some((el) => el.year == year)) {
+      aux.push({ year, months: [{ month, repos: [] }] });
+    } else {
+      var ind = aux.findIndex((el) => el.year == year);
+      if (!aux[ind].months.some((el) => el.month == month)) {
+        aux[aux.findIndex((el) => el.year == year)].months.push({
+          month,
+          repos: [],
+        });
+      }
+    }
+
+    var yearAux = aux[aux.findIndex((el) => el.year == year)].months;
+    var monthAux = yearAux[yearAux.findIndex((el) => el.month == month)];
+    console.log(yearAux, monthAux);
+    monthAux.repos.push({
       name: it.name,
       date: `${month.substring(0, 3)} ${day}, ${year}`,
       desc: it.description,
+      day: day,
     });
-
-    if (!months.some((el) => el.month == month)) {
-      months.push({ month, repos });
-      repos = [];
-    }
-    if (!aux.some((el) => el.year == year)) {
-      aux.push({ year, months });
-      months = [];
-    }
   });
 
   aux = aux.sort((a, b) => a.year - b.year);
+  aux.map((el) => {
+    el.months.map((it) => {
+      return {
+        month: it.month,
+        repos: it.repos.sort((a, b) => a.day - b.day),
+      };
+    });
+  });
+  console.log(aux);
   return aux;
 }
 
