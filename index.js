@@ -47,6 +47,7 @@ async function getData(name) {
       date: `${month.substring(0, 3)} ${day}, ${year}`,
       desc: it.description,
       day: day,
+      url: it.html_url
     });
   });
 
@@ -86,6 +87,7 @@ $(document).ready(function () {
                 <div class="timeline-year"> ${el.year}</div>
             </div>`
         );
+
         el.months.forEach((it, ind) => {
           $("#y" + i).append(
             `<div id="m${ind}y${i}">
@@ -96,13 +98,13 @@ $(document).ready(function () {
             $("#m" + ind + "y" + i).append(
               `<div id="m${ind}y${i}r${index}">
               <div class="card-line"></div>
-                    <div class="timeline-card">
+                    <a class="timeline-card" href="${elem.url}" target="_blank">
                         <div class="card-name">${elem.name}</div>
                         <div class="card-date">${elem.date}</div>
                         <div class="card-desc">${
                           elem.desc != null ? elem.desc : ""
                         }</div>
-                    </div>
+                    </a>
                 </div>`
             );
           });
