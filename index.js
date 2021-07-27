@@ -43,6 +43,7 @@ async function getData(name) {
     }
   });
 
+  aux = aux.sort((a, b) => a.year - b.year);
   return aux;
 }
 
@@ -82,7 +83,9 @@ $(document).ready(function () {
                     <div class="timeline-card">
                         <div class="card-name">${elem.name}</div>
                         <div class="card-date">${elem.date}</div>
-                        <div class="card-desc">${elem.desc!=null?elem.desc:''}</div>
+                        <div class="card-desc">${
+                          elem.desc != null ? elem.desc : ""
+                        }</div>
                     </div>
                 </div>`
             );
