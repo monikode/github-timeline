@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"
+    ></script>
+    <script src="index.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="username-container">
+      <div class="username-form">
+        <div class="username-title">Github's Timeline</div>
+        <div class="username-subtitle">
+          Enter an username to generate a timeline.
+        </div>
+        <form method="post">
+          <input placeholder="Username..." />
+          <button>
+            <span class="input-search">Search</span>
+            <span class="input-error">Invalid name</span>
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="timeline-container">
+      <div class="timeline-line"></div>
+      <div class="timeline-end">
+        The end :)
+      </div>
+      <div class="timeline-back">
+        <a>Click here </a>to search another username
+      </div>
+    </div>
+  </body>
+</html>
